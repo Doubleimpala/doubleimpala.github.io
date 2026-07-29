@@ -17,7 +17,7 @@
   <script src="ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/_ds_bundle.js"></script>
   <style>
     html { scroll-behavior: smooth; }
-    body { margin: 0; background: var(--bg-canvas); color: var(--text-primary); font-family: var(--font-body); }
+    body { margin: 0; background: var(--purple-800); color: var(--text-primary); font-family: var(--font-body); }
     a { color: var(--link); text-decoration: none; }
     a:hover { color: var(--link-hover); }
     .page-shell {
@@ -77,46 +77,45 @@
       text-transform: uppercase;
       color: var(--color-accent);
     }
-    .research-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    .research-rail {
+      display: flex;
       gap: var(--space-4);
+      overflow-x: auto;
+      padding-bottom: var(--space-2);
+      scroll-snap-type: x proximity;
     }
-    .research-card {
-      padding: var(--space-6);
+    .research-item {
+      flex: 0 0 330px;
+      padding: var(--space-5);
       border: 1px solid var(--border-default);
       border-radius: var(--radius-lg);
-      background: linear-gradient(180deg, rgba(38, 100, 64, 0.08), rgba(18, 16, 20, 0.96));
+      background: linear-gradient(180deg, rgba(110, 71, 160, 0.16), rgba(18, 16, 20, 0.94));
       box-shadow: var(--shadow-sm);
+      scroll-snap-align: start;
     }
-    .research-card h3 {
-      margin: 0 0 var(--space-3);
+    .research-item[open] {
+      border-color: color-mix(in srgb, var(--color-accent) 34%, var(--border-default));
+    }
+    .research-item summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .research-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .research-item h3 {
+      margin: 0;
       font-family: var(--font-display);
       font-size: var(--text-lg);
       letter-spacing: var(--tracking-tight);
     }
-    .research-card p {
+    .research-item p {
       margin: 0;
       color: var(--text-secondary);
       line-height: var(--leading-relaxed);
-    }
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
-      margin-top: var(--space-4);
-    }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      padding: 0.35rem 0.65rem;
-      border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--color-accent) 28%, var(--border-default));
-      background: rgba(38, 100, 64, 0.12);
-      color: var(--text-on-accent);
-      font-family: var(--font-mono);
-      font-size: var(--text-xs);
-      letter-spacing: var(--tracking-wide);
     }
     .projects-grid {
       display: grid;
@@ -145,7 +144,10 @@
 
   <nav style="display:flex; align-items:center; justify-content:space-between; max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-6) var(--space-8); box-sizing:border-box;">
     <a href="Home.dc.html" style="display:flex; align-items:baseline; gap:var(--space-3);">
-      <span style="font-family:var(--font-display); font-weight:var(--weight-semibold); font-size:var(--text-md); color:var(--text-primary); letter-spacing:var(--tracking-tight);">doubleimpala</span>
+      <span style="display:flex; align-items:center; gap:var(--space-2);">
+        <img src="favicon.svg" alt="" aria-hidden="true" style="width:18px; height:18px; display:block;">
+        <span style="font-family:var(--font-display); font-weight:var(--weight-semibold); font-size:var(--text-md); color:var(--text-primary); letter-spacing:var(--tracking-tight);">doubleimpala</span>
+      </span>
       <span style="font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-muted);">Tanmay Garudadri</span>
     </a>
     <a href="Home.dc.html" style="font-family:var(--font-display); font-size:var(--text-sm); color:var(--text-secondary);">home</a>
@@ -155,12 +157,12 @@
     <div class="section-shell">
       <section id="top" class="section-shell" style="gap:var(--space-6); max-width:760px;">
         <div class="section-header">
-          <span class="section-kicker">research and projects</span>
+          <span class="section-kicker">research &amp; projects</span>
           <h1 style="font-family:var(--font-display); font-size:var(--text-4xl); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); margin:0; font-weight:var(--weight-semibold);">
-            Notes, research, and projects
+            Research &amp; projects
           </h1>
           <p style="font-size:var(--text-lg); line-height:var(--leading-relaxed); color:var(--text-secondary); margin:0; max-width:64ch;">
-            I keep the research notes separate from finished projects here. The green is just an accent, not the main show.
+            I keep the ongoing research separate from finished projects, so the page reads in two passes.
           </p>
         </div>
       </section>
@@ -170,43 +172,47 @@
           <span class="section-kicker">research</span>
           <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); margin:0; letter-spacing:var(--tracking-tight);">Things I’m exploring</h2>
           <p style="margin:0; color:var(--text-muted); max-width:60ch; line-height:var(--leading-relaxed);">
-            These are the topics I’m reading, prototyping, or circling around before they become a full project.
+            Research items stay in a horizontal rail so they feel distinct from the project cards below.
           </p>
         </div>
 
-        <div class="research-grid">
-          <article class="research-card">
-            <h3>Compiler systems</h3>
-            <p>Parsing, lowering, and optimization notes. I like the part where abstractions turn into something the machine can actually do.</p>
-            <div class="pill-row">
-              <span class="pill">notes</span>
-              <span class="pill">active</span>
-            </div>
-          </article>
-          <article class="research-card">
-            <h3>FPGA tensor accelerators</h3>
-            <p>Dataflow, throughput, and memory movement. The interesting bit is usually not the math; it’s the plumbing around it.</p>
-            <div class="pill-row">
-              <span class="pill">hardware</span>
-              <span class="pill">experiments</span>
-            </div>
-          </article>
-          <article class="research-card">
-            <h3>Trajectory optimization</h3>
-            <p>Numerical methods, constraints, and how to make motion planning feel less like guessing with extra steps.</p>
-            <div class="pill-row">
-              <span class="pill">math</span>
-              <span class="pill">ongoing</span>
-            </div>
-          </article>
-          <article class="research-card">
-            <h3>Computer graphics</h3>
-            <p>Geometry, rendering, and the occasional shader rabbit hole. Mostly here because it’s fun and the visuals are honest.</p>
-            <div class="pill-row">
-              <span class="pill">visuals</span>
-              <span class="pill">notes</span>
-            </div>
-          </article>
+        <div class="research-rail">
+          <details class="research-item">
+            <summary>
+              <h3>PHLAME</h3>
+              <p>Trajectory generation for robotics, embedded math work in C, and fast algorithms accelerated with CUDA.</p>
+            </summary>
+            <p style="margin-top:var(--space-4);">This is the work I want to frame as robotics first: motion generation, numerical methods, and systems-level performance work.</p>
+            <p style="margin-top:var(--space-3); color:var(--color-accent-strong); font-family:var(--font-mono); font-size:var(--text-xs);">robotics, embedded C, CUDA</p>
+          </details>
+          <details class="research-item">
+            <summary>
+              <h3>Compiler systems</h3>
+              <p>Parsing, lowering, and optimization notes.</p>
+            </summary>
+            <p style="margin-top:var(--space-4);">I like the part where abstractions turn into something the machine can actually do.</p>
+          </details>
+          <details class="research-item">
+            <summary>
+              <h3>FPGA tensor accelerators</h3>
+              <p>Dataflow, throughput, and memory movement.</p>
+            </summary>
+            <p style="margin-top:var(--space-4);">The interesting bit is usually not the math, it’s the plumbing around it.</p>
+          </details>
+          <details class="research-item">
+            <summary>
+              <h3>Trajectory optimization</h3>
+              <p>Numerical methods and motion planning.</p>
+            </summary>
+            <p style="margin-top:var(--space-4);">How to make planning feel less like guessing with extra steps.</p>
+          </details>
+          <details class="research-item">
+            <summary>
+              <h3>Computer graphics</h3>
+              <p>Geometry, rendering, and shader work.</p>
+            </summary>
+            <p style="margin-top:var(--space-4);">Mostly here because it’s fun and the visuals are honest.</p>
+          </details>
         </div>
       </section>
 
@@ -217,7 +223,7 @@
           <span class="section-kicker">projects</span>
           <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); margin:0; letter-spacing:var(--tracking-tight);">Built things</h2>
           <p style="margin:0; color:var(--text-muted); max-width:60ch; line-height:var(--leading-relaxed);">
-            Finished or near-finished work, organized separately from the research notes above.
+            Finished work, kept separate from the research rail above.
           </p>
         </div>
 
@@ -227,9 +233,6 @@
             <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
               Out-of-order RV32IM RISC-V processor, written in SystemVerilog.
             </p>
-            <div style="display:flex; align-items:center; gap:var(--space-4);">
-              <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Badge" hint-size="auto,22px" variant="success">done</x-import>
-            </div>
           </x-import>
           </a>
           <a href="GPU.dc.html" style="display:contents;">
@@ -237,19 +240,6 @@
             <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
               Renders textured 3D polygons, in C and SystemVerilog on a Spartan 7 FPGA.
             </p>
-            <div style="display:flex; align-items:center; gap:var(--space-4);">
-              <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Badge" hint-size="auto,22px" variant="success">done</x-import>
-            </div>
-          </x-import>
-          </a>
-          <a href="https://github.com/SiddharthKadari/PHLAME" style="display:contents;">
-          <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Card" hint-size="260px,260px" interactive="{{ true }}" title="PHLAME" style="{{ {aspectRatio:'1/1', justifyContent:'space-between'} }}">
-            <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
-              Multi-vehicle trajectory planning via AGHF &mdash; with Siddharth Kadari.
-            </p>
-            <div style="display:flex; align-items:center; gap:var(--space-4);">
-              <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Badge" hint-size="auto,22px">wip</x-import>
-            </div>
           </x-import>
           </a>
         </div>
@@ -270,7 +260,6 @@
       <a href="#top">Overview</a>
       <a href="#research">Research</a>
       <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
     </aside>
   </main>
 
