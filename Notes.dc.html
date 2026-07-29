@@ -77,44 +77,69 @@
       text-transform: uppercase;
       color: var(--color-accent);
     }
-    .research-rail {
+    .entry-list {
       display: flex;
       flex-direction: column;
       gap: var(--space-4);
     }
-    .research-item {
+    .entry-item {
       position: relative;
       width: 100%;
       box-sizing: border-box;
       padding-bottom: var(--space-6);
       border-bottom: 1px solid var(--border-default);
     }
-    .research-item:last-child {
+    .entry-item:last-child {
       border-bottom: none;
       padding-bottom: 0;
     }
-    .research-item summary {
+    a.entry-item {
+      display: block;
+      color: inherit;
+    }
+    .entry-item summary {
       cursor: pointer;
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: var(--space-2);
     }
-    .research-item summary::-webkit-details-marker {
+    .entry-item summary::-webkit-details-marker {
       display: none;
     }
-    .research-item h3 {
+    .entry-item h3 {
       margin: 0;
       font-family: var(--font-display);
       font-size: var(--text-lg);
       letter-spacing: var(--tracking-tight);
     }
-    .research-item p {
+    .entry-item p {
       margin: 0;
       color: var(--text-secondary);
       line-height: var(--leading-relaxed);
     }
-    .research-links-side {
+    .entry-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .entry-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+    .entry-arrow {
+      flex-shrink: 0;
+      color: var(--text-muted);
+      transition: color 160ms ease, transform 160ms ease;
+      margin-top: var(--space-1);
+    }
+    a.entry-item:hover .entry-arrow {
+      color: var(--color-accent);
+      transform: translateX(3px);
+    }
+    .entry-links-side {
       position: absolute;
       left: calc(-1 * var(--space-16) - var(--space-6));
       top: 2px;
@@ -122,25 +147,25 @@
       flex-direction: column;
       gap: var(--space-2);
     }
-    .research-links-side a,
-    .research-links-inline a {
+    .entry-links-side a,
+    .entry-links-inline a {
       display: flex;
       align-items: center;
       gap: var(--space-1);
       color: var(--text-muted);
       transition: color 160ms ease;
     }
-    .research-links-side a:hover,
-    .research-links-inline a:hover {
+    .entry-links-side a:hover,
+    .entry-links-inline a:hover {
       color: var(--color-accent);
     }
-    .research-links-side svg,
-    .research-links-inline svg {
+    .entry-links-side svg,
+    .entry-links-inline svg {
       width: 15px;
       height: 15px;
       flex-shrink: 0;
     }
-    .research-links-inline {
+    .entry-links-inline {
       display: flex;
       gap: var(--space-4);
       margin-top: var(--space-1);
@@ -148,17 +173,12 @@
       font-size: var(--text-xs);
     }
     @media (min-width: 1440px) {
-      .research-links-side {
+      .entry-links-side {
         display: flex;
       }
-      .research-links-inline {
+      .entry-links-inline {
         display: none;
       }
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: var(--space-4);
     }
     .section-divider {
       height: 1px;
@@ -199,48 +219,45 @@
           <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); margin:0; letter-spacing:var(--tracking-tight);">Things I’m exploring</h2>
         </div>
 
-        <div class="research-rail">
-          <details class="research-item">
+        <div class="entry-list">
+          <details class="entry-item" open>
+            <div class="entry-links-side">
+              <a href="https://github.com/SiddharthKadari/PHLAME" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a>
+            </div>
             <summary>
               <h3>PHLAME</h3>
               <p>Trajectory generation for robotics, embedded math work in C, and fast algorithms accelerated with CUDA.</p>
             </summary>
-            <p style="margin-top:var(--space-4);">This is the work I want to frame as robotics first: motion generation, numerical methods, and systems-level performance work.</p>
-            <p style="margin-top:var(--space-3); color:var(--color-accent-strong); font-family:var(--font-mono); font-size:var(--text-xs);">robotics, embedded C, CUDA</p>
+            <div class="entry-links-inline">
+              <a href="https://github.com/SiddharthKadari/PHLAME" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg><span>GitHub</span></a>
+            </div>
           </details>
-          <details class="research-item">
-            <div class="research-links-side">
+          <details class="entry-item" open>
+            <div class="entry-links-side">
+              <a href="https://act-compiler.github.io/assets/pdf/2025-micro-taidl.pdf" target="_blank" rel="noopener noreferrer" aria-label="Paper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg></a>
               <a href="https://github.com/act-compiler/act" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg></a>
             </div>
             <summary>
-              <h3>Compiler systems</h3>
-              <p>Parsing, lowering, and optimization notes.</p>
+              <h3>ACT</h3>
+              <p>An automated compiler pipeline translating accelerator ISA specs into synthesizable FPGA hardware — backend codegen, HLS resource optimization, and HBM/AXI memory interfacing, plus custom FPGA attention/QKV accelerators over XRT/PCIe and Trainium kernel optimization via trace-based analysis.</p>
             </summary>
-            <div class="research-links-inline">
-                <a href="https://github.com/act-compiler/act" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg><span>GitHub</span></a>
-              </div>
-            <p style="margin-top:var(--space-4);">I like the part where abstractions turn into something the machine can actually do.</p>
+            <div class="entry-links-inline">
+              <a href="https://act-compiler.github.io/assets/pdf/2025-micro-taidl.pdf" target="_blank" rel="noopener noreferrer" aria-label="Paper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span>Paper</span></a>
+              <a href="https://github.com/act-compiler/act" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg><span>GitHub</span></a>
+            </div>
           </details>
-          <details class="research-item">
+          <details class="entry-item" open>
+            <div class="entry-links-side">
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10387354/" target="_blank" rel="noopener noreferrer" aria-label="Paper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg></a>
+            </div>
             <summary>
-              <h3>FPGA tensor accelerators</h3>
-              <p>Dataflow, throughput, and memory movement.</p>
+              <h3>Role of Surface Tension in Microrobot Penetration in Membranes</h3>
+              <p>Modeling how microrobots penetrate cell-like membranes via surface-tension-driven fusion, as a step toward microrobots that deliver bioactive compounds directly into cells.</p>
             </summary>
-            <p style="margin-top:var(--space-4);">The interesting bit is usually not the math, it’s the plumbing around it.</p>
-          </details>
-          <details class="research-item">
-            <summary>
-              <h3>Trajectory optimization</h3>
-              <p>Numerical methods and motion planning.</p>
-            </summary>
-            <p style="margin-top:var(--space-4);">How to make planning feel less like guessing with extra steps.</p>
-          </details>
-          <details class="research-item">
-            <summary>
-              <h3>Computer graphics</h3>
-              <p>Geometry, rendering, and shader work.</p>
-            </summary>
-            <p style="margin-top:var(--space-4);">Mostly here because it’s fun and the visuals are honest.</p>
+            <p style="margin-top:var(--space-4);">Membrane-penetrating microrobots are a promising route for delivering bioactive compounds into cells, but the fluid dynamics of the penetration itself — once fusion begins — hadn't been well studied. This work shows a microrobot droplet's penetration depth into a liquid bath depends on the surface tension difference between droplet and bath, the curvature of the connecting bridge, and the droplet's size.</p>
+            <div class="entry-links-inline">
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10387354/" target="_blank" rel="noopener noreferrer" aria-label="Paper"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span>Paper</span></a>
+            </div>
           </details>
         </div>
       </section>
@@ -253,20 +270,24 @@
           <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); margin:0; letter-spacing:var(--tracking-tight);">Things I'm building</h2>
         </div>
 
-        <div class="projects-grid">
-          <a href="EPYCfail.dc.html" style="display:contents;">
-          <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Card" hint-size="260px,260px" interactive="{{ true }}" title="EPYCfail" style="{{ {aspectRatio:'1/1', justifyContent:'space-between'} }}">
-            <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
-              Out-of-order RV32IM RISC-V processor, written in SystemVerilog.
-            </p>
-          </x-import>
+        <div class="entry-list">
+          <a class="entry-item" href="EPYCfail.dc.html">
+            <div class="entry-row">
+              <div class="entry-body">
+                <h3>EPYCfail</h3>
+                <p>Out-of-order RV32IM RISC-V processor, written in SystemVerilog.</p>
+              </div>
+              <svg class="entry-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </div>
           </a>
-          <a href="GPU.dc.html" style="display:contents;">
-          <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Card" hint-size="260px,260px" interactive="{{ true }}" title="A tiny GPU" style="{{ {aspectRatio:'1/1', justifyContent:'space-between'} }}">
-            <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
-              Renders textured 3D polygons, in C and SystemVerilog on a Spartan 7 FPGA.
-            </p>
-          </x-import>
+          <a class="entry-item" href="GPU.dc.html">
+            <div class="entry-row">
+              <div class="entry-body">
+                <h3>A tiny GPU</h3>
+                <p>Renders textured 3D polygons, in C and SystemVerilog on a Spartan 7 FPGA.</p>
+              </div>
+              <svg class="entry-arrow" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+            </div>
           </a>
         </div>
       </section>
