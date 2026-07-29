@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/base.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/styles.css">
+  <script src="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--bg-canvas); color: var(--text-primary); font-family: var(--font-body); }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; flex-direction:column;">
+
+  <nav style="display:flex; align-items:center; justify-content:space-between; max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-6) var(--space-8); box-sizing:border-box;">
+    <a href="Home.dc.html" style="display:flex; align-items:baseline; gap:var(--space-3);">
+      <span style="font-family:var(--font-display); font-weight:var(--weight-semibold); font-size:var(--text-md); color:var(--text-primary); letter-spacing:var(--tracking-tight);">doubleimpala</span>
+      <span style="font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-muted);">Tanmay Garudadri</span>
+    </a>
+    <a href="Home.dc.html" style="font-family:var(--font-display); font-size:var(--text-sm); color:var(--text-secondary);">home</a>
+  </nav>
+
+  <main style="flex:1; max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-16) var(--space-8) var(--space-24); box-sizing:border-box; display:flex; flex-direction:column; gap:var(--space-8);">
+
+    <h1 style="font-family:var(--font-display); font-size:var(--text-3xl); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-tight); margin:0;">
+      Notes &amp; projects
+    </h1>
+    <p style="font-size:var(--text-base); line-height:var(--leading-relaxed); color:var(--text-muted); margin:0; max-width:60ch;">
+      Things I'm building and things I'm thinking about, added as they happen.
+    </p>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:var(--space-4);">
+      <a href="EPYCfail.dc.html" style="display:contents;">
+      <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Card" hint-size="260px,260px" interactive="{{ true }}" title="EPYCfail" style="{{ {aspectRatio:'1/1', justifyContent:'space-between'} }}">
+        <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
+          Out-of-order RV32IM RISC-V processor, written in SystemVerilog.
+        </p>
+        <div style="display:flex; align-items:center; gap:var(--space-4);">
+          <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Badge" hint-size="auto,22px" variant="success">done</x-import>
+        </div>
+      </x-import>
+      </a>
+      <a href="GPU.dc.html" style="display:contents;">
+      <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Card" hint-size="260px,260px" interactive="{{ true }}" title="A tiny GPU" style="{{ {aspectRatio:'1/1', justifyContent:'space-between'} }}">
+        <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
+          Renders textured 3D polygons, in C and SystemVerilog on a Spartan 7 FPGA.
+        </p>
+        <div style="display:flex; align-items:center; gap:var(--space-4);">
+          <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Badge" hint-size="auto,22px" variant="success">done</x-import>
+        </div>
+      </x-import>
+      </a>
+      <a href="https://github.com/SiddharthKadari/PHLAME" style="display:contents;">
+      <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Card" hint-size="260px,260px" interactive="{{ true }}" title="PHLAME" style="{{ {aspectRatio:'1/1', justifyContent:'space-between'} }}">
+        <p style="margin:0; color:var(--text-secondary); font-size:var(--text-base);">
+          Multi-vehicle trajectory planning via AGHF &mdash; with Siddharth Kadari.
+        </p>
+        <div style="display:flex; align-items:center; gap:var(--space-4);">
+          <x-import component-from-global-scope="DoubleImpalaDesignSystem_d3e564.Badge" hint-size="auto,22px">wip</x-import>
+        </div>
+      </x-import>
+      </a>
+    </div>
+
+  </main>
+
+  <footer style="max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-8); box-sizing:border-box; font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-muted);">
+    &copy; 2026 doubleimpala
+  </footer>
+
+</div>
+
+</x-dc>
+</body>
+</html>

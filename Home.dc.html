@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/base.css">
+  <link rel="stylesheet" href="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/styles.css">
+  <script src="_ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--bg-canvas); color: var(--text-primary); font-family: var(--font-body); }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; flex-direction:column;">
+
+  <nav style="display:flex; align-items:center; justify-content:space-between; max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-6) var(--space-8); box-sizing:border-box;">
+    <div style="display:flex; align-items:baseline; gap:var(--space-3);">
+      <span style="font-family:var(--font-display); font-weight:var(--weight-semibold); font-size:var(--text-md); letter-spacing:var(--tracking-tight);">doubleimpala</span>
+      <span style="font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-muted);">Tanmay Garudadri</span>
+    </div>
+    <a href="Notes.dc.html" style="font-family:var(--font-display); font-size:var(--text-sm); color:var(--text-secondary);">notes &amp; projects</a>
+  </nav>
+
+  <main style="flex:1; max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-16) var(--space-8) var(--space-24); box-sizing:border-box; display:flex; flex-direction:column; gap:var(--space-24);">
+
+    <section style="display:flex; flex-direction:column; gap:var(--space-6); max-width:720px;">
+      <h1 style="font-family:var(--font-display); font-size:var(--text-4xl); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); margin:0; font-weight:var(--weight-semibold);">
+        Tanmay Garudadri
+      </h1>
+      <p style="font-size:var(--text-lg); line-height:var(--leading-relaxed); color:var(--text-secondary); margin:0;">
+        I'm a computer engineering student at UIUC.<br>I like learning things and applying them.</p>
+      <p style="font-size:var(--text-base); line-height:var(--leading-relaxed); color:var(--text-muted); margin:0; max-width:60ch;">Here I document my projects!<br>Some interests as of late: compiler systems, FPGA tensor accelerators, trajectory optimization, computer graphics.</p>
+    </section>
+
+    
+
+    <section style="display:flex; flex-direction:column; gap:var(--space-3); padding-top:var(--space-8); border-top:1px solid var(--border-default);">
+      <span style="font-family:var(--font-mono); font-size:var(--text-xs); letter-spacing:var(--tracking-wider); text-transform:uppercase; color:var(--text-muted);">say hi</span>
+      <div style="display:flex; flex-wrap:wrap; gap:var(--space-6); font-family:var(--font-display); font-size:var(--text-base);">
+        <a href="mailto:you@example.com">email</a>
+        <a href="https://github.com/">github</a>
+        <a href="https://linkedin.com/">linkedin</a>
+      </div>
+    </section>
+
+  </main>
+
+  
+
+</div>
+
+</x-dc>
+</body>
+</html>
