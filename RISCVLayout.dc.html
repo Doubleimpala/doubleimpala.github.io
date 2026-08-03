@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/colors.css">
+  <link rel="stylesheet" href="ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/typography.css">
+  <link rel="stylesheet" href="ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/spacing.css">
+  <link rel="stylesheet" href="ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/tokens/base.css">
+  <link rel="stylesheet" href="ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/styles.css">
+  <script src="ds/double-impala-design-system-d3e56450-a6f9-4d9f-a458-70f58b4d2fed/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--purple-900); color: var(--text-primary); font-family: var(--font-body); }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--link-hover); }
+    .media-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4);
+    }
+    .media-gallery figure {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .media-gallery a {
+      display: block;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-surface);
+    }
+    .media-gallery img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #000;
+    }
+    .media-gallery figcaption {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
+  </style>
+</helmet>
+
+<div style="min-height:100vh; display:flex; flex-direction:column;">
+
+  <nav style="display:flex; align-items:center; justify-content:space-between; max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-6) var(--space-8); box-sizing:border-box;">
+    <a href="Home.dc.html" style="display:flex; align-items:baseline; gap:var(--space-3);">
+      <span style="display:flex; align-items:center; gap:var(--space-2);">
+        <img src="favicon.svg" alt="" aria-hidden="true" style="width:18px; height:18px; display:block;">
+        <span style="font-family:var(--font-display); font-weight:var(--weight-semibold); font-size:var(--text-md); color:var(--text-primary); letter-spacing:var(--tracking-tight);">doubleimpala</span>
+      </span>
+      <span style="font-family:var(--font-mono); font-size:var(--text-xs); color:var(--text-muted);">Tanmay Garudadri</span>
+    </a>
+    <a href="Home.dc.html#projects" style="font-family:var(--font-display); font-size:var(--text-sm); color:var(--text-secondary);">&larr; projects</a>
+  </nav>
+
+  <main style="flex:1; max-width:var(--container-max); width:100%; margin:0 auto; padding:var(--space-8) var(--space-8) var(--space-24); box-sizing:border-box; display:flex; flex-direction:column; gap:var(--space-8);">
+
+    <h1 style="font-family:var(--font-display); font-size:var(--text-3xl); font-weight:var(--weight-semibold); letter-spacing:var(--tracking-tight); margin:0;">RISC-V CPU Physical Design Layout</h1>
+    <p style="font-size:var(--text-base); line-height:var(--leading-relaxed); color:var(--text-muted); margin:0; max-width:60ch;">
+      Designed and physically implemented a single-cycle RISC-V processor using a full RTL-to-GDSII flow with Cadence Virtuoso and Innovus in FreePDK45.
+    </p>
+
+    <div style="display:flex; flex-direction:column; gap:var(--space-4); max-width:70ch;">
+      <p style="font-size:var(--text-base); line-height:var(--leading-relaxed); color:var(--text-secondary); margin:0;">
+        Created transistor-level schematics and custom standard-cell layouts for datapath components including the ALU and register file. Performed DRC/LVS verification and optimized layouts for area and routing constraints.
+      </p>
+      <p style="font-size:var(--text-base); line-height:var(--leading-relaxed); color:var(--text-secondary); margin:0;">
+        Developed TCL automation scripts for synthesis, floorplanning, place-and-route, clock tree synthesis, and timing analysis, generating fully placed-and-routed CPU implementations in Cadence Innovus.
+      </p>
+    </div>
+
+    <div class="media-gallery">
+      <figure>
+        <a href="uploads/riscv-layout/datapath-layout.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/riscv-layout/datapath-layout.png" alt="Full-chip datapath layout">
+        </a>
+        <figcaption>Datapath layout</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/riscv-layout/cpu2.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/riscv-layout/cpu2.png" alt="Physical layout view in Cadence">
+        </a>
+        <figcaption>Physical layout (Cadence)</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/riscv-layout/integration.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/riscv-layout/integration.png" alt="Integration and PNR control layout">
+        </a>
+        <figcaption>Integration / PNR control layout</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/riscv-layout/andp.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/riscv-layout/andp.png" alt="ALU and bitslice datapath schematic">
+        </a>
+        <figcaption>ALU / bitslice schematic</figcaption>
+      </figure>
+    </div>
+
+  </main>
+
+</div>
+
+</x-dc>
+</body>
+</html>
