@@ -19,6 +19,36 @@
     body { margin: 0; background: var(--purple-900); color: var(--text-primary); font-family: var(--font-body); }
     a { color: var(--link); text-decoration: none; }
     a:hover { color: var(--link-hover); }
+    .media-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4);
+    }
+    .media-gallery figure {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .media-gallery a {
+      display: block;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-surface);
+    }
+    .media-gallery img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #000;
+    }
+    .media-gallery figcaption {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
   </style>
 </helmet>
 
@@ -46,8 +76,39 @@
       <a href="https://github.com/Doubleimpala/3d-Polygonal-Graphics-Processor">repo &rarr;</a>
     </div>
 
-    <div style="width:100%; height:360px; border:1px solid var(--border-default); border-radius:var(--radius-lg); background:linear-gradient(135deg, rgba(110,71,160,.28), rgba(18,16,20,.92)); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-family:var(--font-mono); letter-spacing:var(--tracking-wide);">
-      project media goes here
+    <video src="uploads/gpu/demo.mp4" controls playsinline style="width:100%; border:1px solid var(--border-default); border-radius:var(--radius-lg); background:#000;"></video>
+
+    <div class="media-gallery">
+      <figure>
+        <a href="uploads/gpu/axi_bmp.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/gpu/axi_bmp.png" alt="Rasterized triangles read back over AXI">
+        </a>
+        <figcaption>Rasterized output (readback over AXI)</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/gpu/sw_scene_1.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/gpu/sw_scene_1.png" alt="Software reference render, scene 1">
+        </a>
+        <figcaption>Software reference render 1</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/gpu/sw_scene_2.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/gpu/sw_scene_2.png" alt="Software reference render, scene 2">
+        </a>
+        <figcaption>Software reference render 2</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/gpu/sw_scene_3.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/gpu/sw_scene_3.png" alt="Software reference render, scene 3">
+        </a>
+        <figcaption>Software reference render 3</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/gpu/state_diagram.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/gpu/state_diagram.png" alt="Rasterizer pipeline state diagram">
+        </a>
+        <figcaption>Rasterizer pipeline states</figcaption>
+      </figure>
     </div>
 
     <div style="display:flex; flex-direction:column; gap:var(--space-3);">

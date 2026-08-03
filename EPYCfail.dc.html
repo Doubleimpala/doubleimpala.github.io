@@ -19,6 +19,36 @@
     body { margin: 0; background: var(--purple-900); color: var(--text-primary); font-family: var(--font-body); }
     a { color: var(--link); text-decoration: none; }
     a:hover { color: var(--link-hover); }
+    .media-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-4);
+    }
+    .media-gallery figure {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .media-gallery a {
+      display: block;
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--bg-surface);
+    }
+    .media-gallery img {
+      display: block;
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      background: #000;
+    }
+    .media-gallery figcaption {
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+    }
   </style>
 </helmet>
 
@@ -46,8 +76,31 @@
       <a href="https://github.com/Doubleimpala/EPYCfail-RV32IM-OoO-Processor">repo &rarr;</a>
     </div>
 
-    <div style="width:100%; height:360px; border:1px solid var(--border-default); border-radius:var(--radius-lg); background:linear-gradient(135deg, rgba(110,71,160,.28), rgba(18,16,20,.92)); display:flex; align-items:center; justify-content:center; color:var(--text-muted); font-family:var(--font-mono); letter-spacing:var(--tracking-wide);">
-      project media goes here
+    <div class="media-gallery">
+      <figure>
+        <a href="uploads/epycfail/datapath-layout.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/epycfail/datapath-layout.png" alt="Full-chip datapath layout">
+        </a>
+        <figcaption>Datapath layout</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/epycfail/cpu2.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/epycfail/cpu2.png" alt="Physical layout view in Cadence">
+        </a>
+        <figcaption>Physical layout (Cadence)</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/epycfail/integration.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/epycfail/integration.png" alt="Integration and PNR control layout">
+        </a>
+        <figcaption>Integration / PNR control layout</figcaption>
+      </figure>
+      <figure>
+        <a href="uploads/epycfail/andp.png" target="_blank" rel="noopener noreferrer">
+          <img src="uploads/epycfail/andp.png" alt="ALU and bitslice datapath schematic">
+        </a>
+        <figcaption>ALU / bitslice schematic</figcaption>
+      </figure>
     </div>
 
     <div style="display:flex; flex-direction:column; gap:var(--space-3);">
