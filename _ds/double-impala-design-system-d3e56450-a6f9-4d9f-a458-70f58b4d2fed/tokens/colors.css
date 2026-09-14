@@ -7,7 +7,7 @@
 --color-accent:var(--green-400);--color-accent-strong:var(--green-300);--color-accent-soft:var(--green-700);
 --bg-canvas:var(--gray-950);--bg-page:var(--purple-950);--bg-surface:var(--gray-900);--bg-surface-raised:var(--gray-800);--bg-surface-hover:var(--gray-700);
 --border-default:var(--gray-600);--border-strong:var(--gray-500);--border-focus:var(--purple-400);
---text-primary:var(--gray-50);--text-secondary:var(--gray-300);--text-muted:var(--gray-400);--text-on-primary:var(--purple-50);--text-on-accent:var(--green-50);
+--text-primary:#000;--text-secondary:var(--gray-300);--text-muted:var(--gray-400);--text-on-primary:var(--purple-50);--text-on-accent:var(--green-50);
 --color-success:var(--green-400);--color-warning:var(--amber-500);--color-danger:var(--red-500);--color-info:var(--purple-300);
 --link:var(--purple-300);--link-hover:var(--purple-200);
 }
