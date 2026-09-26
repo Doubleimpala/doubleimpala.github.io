@@ -1,7 +1,7 @@
 :root{
---font-display:'Helvetica Neue',Arial,sans-serif;
---font-body:'Helvetica Neue',Arial,sans-serif;
---font-mono:'Helvetica Neue',Arial,sans-serif;
+--font-display:'SF Pro Display','SF Pro Text',-apple-system,BlinkMacSystemFont,sans-serif;
+--font-body:'SF Pro Text',-apple-system,BlinkMacSystemFont,sans-serif;
+--font-mono:'SF Pro Text',-apple-system,BlinkMacSystemFont,sans-serif;
 --text-xs:.75rem;--text-sm:.875rem;--text-base:1rem;--text-md:1.125rem;--text-lg:1.375rem;--text-xl:1.75rem;--text-2xl:2.25rem;--text-3xl:3rem;--text-4xl:4rem;--text-5xl:5.5rem;
 --leading-tight:1.1;--leading-snug:1.3;--leading-normal:1.55;--leading-relaxed:1.7;
 --tracking-tight:-.02em;--tracking-normal:0;--tracking-wide:.06em;--tracking-wider:.12em;
