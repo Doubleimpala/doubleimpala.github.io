@@ -22,6 +22,7 @@
     a { color: var(--link); text-decoration: none; }
     a:hover { color: var(--link-hover); }
     .page-shell {
+      --text-secondary: #6e6e73;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -118,7 +119,7 @@
       width: 100%;
       box-sizing: border-box;
       padding-bottom: var(--space-3);
-      border-bottom: 1px solid var(--border-default);
+      border-bottom: 1px solid #d2d2d7;
     }
     .entry-item:last-child {
       border-bottom: none;
@@ -188,11 +189,20 @@
     }
     .intro-links {
       display: flex;
+      margin-top: calc(var(--space-3) - var(--space-6));
       justify-content: flex-start;
       flex-wrap: wrap;
       gap: var(--space-6);
       font-family: var(--font-display);
       font-size: var(--text-base);
+    }
+    .intro-links a {
+      color: var(--text-secondary);
+      transition: color 160ms ease;
+    }
+    .intro-links a:hover,
+    .intro-links a:focus-visible {
+      color: var(--color-accent);
     }
     @media (max-width: 1320px) {
       .section-nav {
