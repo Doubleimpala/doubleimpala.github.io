@@ -5,7 +5,7 @@ set -euo pipefail
 # Usage: ./scripts/verify-preview.sh [output.png] [page]
 PREVIEW_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PREVIEW_OUTPUT="${1:-/tmp/doubleimpala-preview.png}"
-PREVIEW_PAGE="${2:-Home.dc.html}"
+PREVIEW_PAGE="${2:-index.html}"
 PREVIEW_PORT="$(python3 -c 'import socket; s = socket.socket(); s.bind(("127.0.0.1", 0)); print(s.getsockname()[1]); s.close()')"
 PREVIEW_TEMP_DIR="$(mktemp -d)"
 PREVIEW_CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
