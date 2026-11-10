@@ -204,6 +204,34 @@
     .intro-links a:focus-visible {
       color: var(--color-accent);
     }
+    .intro-hero {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-8);
+    }
+    .intro-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .intro-photo {
+      flex-shrink: 0;
+      width: 340px;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 720px) {
+      .intro-hero {
+        flex-direction: column;
+      }
+      .intro-photo {
+        width: 100%;
+        max-width: 360px;
+        order: -1;
+      }
+    }
     @media (max-width: 1320px) {
       .section-nav {
         display: none;
@@ -216,16 +244,21 @@
 
   <main class="notes-layout">
     <div class="section-shell">
-      <section id="top" style="display:flex; flex-direction:column; gap:var(--space-6); margin-bottom:var(--space-16);">
-        <h1 style="font-family:var(--font-display); font-size:var(--text-4xl); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); margin:0; font-weight:var(--weight-semibold);">
-          Tanmay Garudadri
-        </h1>
-        <p style="font-size:var(--text-lg); line-height:var(--leading-relaxed); color:var(--text-secondary); margin:0;">
-          I'm a computer engineering student at UIUC.<br>I'm generally interested in silicon hardware and robotics.<br>Some interests as of late: compilers, FPGAs, ASICs, graphics.</p>
-        <div class="intro-links">
-          <a href="mailto:garudadri.tanmay17@gmail.com">email</a>
-          <a href="https://github.com/Doubleimpala">github</a>
-          <a href="https://www.linkedin.com/in/tanmay-garudadri/">linkedin</a>
+      <section id="top" style="margin-bottom:var(--space-16);">
+        <div class="intro-hero">
+          <div class="intro-text">
+            <h1 style="font-family:var(--font-display); font-size:var(--text-4xl); line-height:var(--leading-tight); letter-spacing:var(--tracking-tight); margin:0; font-weight:var(--weight-semibold);">
+              Tanmay Garudadri
+            </h1>
+            <p style="font-size:var(--text-lg); line-height:var(--leading-relaxed); color:var(--text-secondary); margin:0;">
+              I'm a computer engineering student at UIUC.<br>I'm generally interested in silicon hardware and robotics.<br>Some interests as of late: compilers, FPGAs, ASICs, graphics.</p>
+            <div class="intro-links">
+              <a href="mailto:garudadri.tanmay17@gmail.com">email</a>
+              <a href="https://github.com/Doubleimpala">github</a>
+              <a href="https://www.linkedin.com/in/tanmay-garudadri/">linkedin</a>
+            </div>
+          </div>
+          <img class="intro-photo" src="website-image.jpg" alt="Standing in front of a small waterfall on a trail">
         </div>
       </section>
 
