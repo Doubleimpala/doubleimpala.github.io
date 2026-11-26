@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Render the homepage locally in headless Chrome before deployment.
-# Usage: ./scripts/verify-preview.sh [output.png] [page]
+# Usage: ./scripts/verify-preview.sh [output.png] [page] [width,height]
 PREVIEW_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PREVIEW_OUTPUT="${1:-/tmp/doubleimpala-preview.png}"
 PREVIEW_PAGE="${2:-index.html}"
@@ -40,7 +40,7 @@ done
   --no-default-browser-check \
   --hide-scrollbars \
   --user-data-dir="$PREVIEW_TEMP_DIR/chrome-profile" \
-  --window-size=1440,1200 \
+  --window-size="${3:-1440,1200}" \
   --screenshot="$PREVIEW_OUTPUT" \
   "http://127.0.0.1:$PREVIEW_PORT/$PREVIEW_PAGE?preview=$(date +%s)" \
   >/dev/null 2>&1

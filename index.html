@@ -220,7 +220,47 @@
       display: block;
       opacity: 0.9;
     }
+    .art-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 220px;
+      column-gap: clamp(32px, 5vw, 72px);
+      row-gap: var(--space-8);
+      align-items: start;
+    }
+    .art-section > .section-header,
+    .art-section > .entry-list { grid-column: 1; }
+    .monet-piece {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      margin: 8px 0 0;
+    }
+    .monet-piece img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 2px;
+      box-shadow: 0 2px 8px #26231b12;
+    }
+    .monet-piece figcaption {
+      margin-top: 12px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+    .monet-piece figcaption span { display: block; }
+    @media (max-width: 900px) {
+      .art-section { grid-template-columns: minmax(0, 1fr); }
+      .monet-piece {
+        grid-column: 1;
+        grid-row: auto;
+        width: min(100%, 360px);
+        margin-top: 8px;
+      }
+    }
     @media (max-width: 720px) {
+      .intro-text { width: 100%; }
+      .entry-row { flex-wrap: wrap; }
+      .entry-row > .entry-body { width: 100%; }
       .intro-hero {
         flex-direction: column;
       }
@@ -262,7 +302,7 @@
         </div>
       </section>
 
-      <section id="research" class="section-shell">
+      <section id="research" class="section-shell art-section">
         <div class="section-header">
           <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); margin:0; letter-spacing:var(--tracking-tight);">Research</h2>
         </div>
@@ -305,7 +345,7 @@
         </div>
       </section>
 
-      <section id="projects" class="section-shell">
+      <section id="projects" class="section-shell art-section">
         <div class="section-header">
           <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); margin:0; letter-spacing:var(--tracking-tight);">Projects</h2>
         </div>
@@ -359,7 +399,7 @@
         </div>
       </section>
 
-      <section id="experience" class="section-shell">
+      <section id="experience" class="section-shell art-section">
         <div class="section-header">
           <h2 style="font-family:var(--font-display); font-size:var(--text-2xl); margin:0; letter-spacing:var(--tracking-tight);">Experience</h2>
         </div>
@@ -389,5 +429,6 @@
 </div>
 
 </x-dc>
+<script src="monet-gallery.js" defer></script>
 </body>
 </html>
