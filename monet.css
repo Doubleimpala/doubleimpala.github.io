@@ -37,17 +37,35 @@ html { overflow-x: clip; }
   clip-path: inset(50%);
   white-space: nowrap;
 }
+.project-shell {
+  position: relative;
+  isolation: isolate;
+}
+.project-shell > nav {
+  position: relative;
+  max-width: var(--container-max);
+  width: calc(100% - 64px) !important;
+  background: #fff;
+}
 .project-canvas {
   --text-secondary: #6e6e73;
   --text-muted: #6e6e73;
   flex: 1;
   max-width: var(--container-max);
   width: calc(100% - 64px);
-  margin: 0 auto 64px;
+  margin: 0 auto;
+  isolation: auto;
+  background: #fff;
+  padding-top: 40px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
+}
+.project-canvas::before { display: none; }
+.project-canvas .monet-piece {
+  position: fixed;
+  z-index: -1;
 }
 .project-canvas .repo-button,
 .project-canvas .repo-button:hover { color: #fff; }
@@ -59,5 +77,6 @@ html { overflow-x: clip; }
 @media (max-width: 720px) {
   .art-section { padding: 44px 32px; }
   .art-section::before { inset: 12px; border-radius: 14px; }
-  .project-canvas { width: calc(100% - 32px); margin-bottom: 32px; }
+  .project-canvas { width: calc(100% - 32px); }
+  .project-shell > nav { width: calc(100% - 32px) !important; }
 }

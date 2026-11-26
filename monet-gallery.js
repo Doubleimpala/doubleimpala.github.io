@@ -1,5 +1,5 @@
 // Known titles and offline fallback. Published images are discovered automatically.
-let monetPaintings = [
+const bundledPaintings = [
   { file: 'the-cliff-walk-pourville-repro.jpg', title: 'The Cliff Walk at Pourville' },
   { file: 'base_8145565.jpg', title: 'The Japanese Footbridge' },
   { file: 'the-flowered-garden-reproducti.jpg', title: 'The Flowered Garden' },
@@ -7,6 +7,15 @@ let monetPaintings = [
   { file: 'the-walk-woman-with-a-parasol-.jpg', title: 'Woman with a Parasol' },
   { file: 'Pathway.jpg', title: 'Garden Path' },
 ];
+let monetPaintings = bundledPaintings;
+bundledPaintings.sort((a, b) => a.file < b.file ? -1 : a.file > b.file ? 1 : 0);
+// Reuse the last discovered list immediately, without waiting for GitHub.
+try {
+  const cached = JSON.parse(localStorage.getItem('monet-paintings'));
+  if (Array.isArray(cached) && cached.length && cached.every(p =>
+    typeof p.file === 'string' && !/[\\/]/.test(p.file) && typeof p.title === 'string'
+  )) monetPaintings = cached;
+} catch { /* Storage is optional. */ }
 
 function placeMonetPaintings() {
   const sections = [...document.querySelectorAll('.art-section')]
@@ -26,6 +35,14 @@ function placeMonetPaintings() {
     image.alt = `${painting.title}, a painting by Claude Monet`;
     image.loading = section.classList.contains('project-canvas') ? 'eager' : 'lazy';
     image.decoding = 'async';
+    image.addEventListener('error', () => {
+      // Discovery can see a new file before Pages finishes deploying it.
+      // Fall back to a bundled painting rather than leaving empty sidebars.
+      const fallback = bundledPaintings[(today + slot) % bundledPaintings.length];
+      image.src = `monet/${encodeURIComponent(fallback.file)}`;
+      image.alt = `${fallback.title}, a painting by Claude Monet`;
+      caption.textContent = `${fallback.title} — Claude Monet`;
+    }, { once: true });
     const caption = document.createElement('figcaption');
     caption.textContent = painting.title;
     const artist = document.createElement('span');
@@ -40,6 +57,10 @@ function placeMonetPaintings() {
 // The runtime can replace content again after fetching the document. Reattach
 // any missing artwork without duplicating figures or changing today's choices.
 async function startMonetGallery() {
+  // Paint immediately, including when API requests are slow or unavailable.
+  placeMonetPaintings();
+  const monetObserver = new MutationObserver(placeMonetPaintings);
+  monetObserver.observe(document.body, { childList: true, subtree: true });
   try {
     // GitHub Pages does not provide directory listings. Discover the published
     // folder through GitHub; keep the bundled selection if discovery is offline.
@@ -57,12 +78,12 @@ async function startMonetGallery() {
         title: known.get(f.name) || f.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' '),
       }))
       .sort((a, b) => a.file < b.file ? -1 : a.file > b.file ? 1 : 0);
-    if (discovered.length) monetPaintings = discovered;
+    if (discovered.length) {
+      // Use discoveries on the next page load, avoiding a visible image swap.
+      localStorage.setItem('monet-paintings', JSON.stringify(discovered));
+    }
   } catch {
     // The original paintings remain usable without GitHub or network access.
   }
-  placeMonetPaintings();
-  const monetObserver = new MutationObserver(placeMonetPaintings);
-  monetObserver.observe(document.body, { childList: true, subtree: true });
 }
 startMonetGallery();
