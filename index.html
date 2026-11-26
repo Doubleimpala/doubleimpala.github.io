@@ -50,10 +50,6 @@
       flex-direction: column;
       gap: var(--space-1);
       padding: var(--space-2) 10px;
-      background: rgba(255, 255, 255, 0.94);
-      border-radius: 20px;
-      box-shadow: 0 2px 12px #00000014;
-      backdrop-filter: blur(8px);
     }
     .section-nav::before {
       content: "";
@@ -63,6 +59,7 @@
       left: 10px;
       width: 1px;
       background: var(--border-default);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
     }
     .section-nav a {
       position: relative;
@@ -80,6 +77,7 @@
       width: 8px;
       height: 1px;
       background: var(--border-default);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.8);
       transition: width 160ms ease, background-color 160ms ease;
     }
     .section-nav-label {
