@@ -221,43 +221,52 @@
       opacity: 0.9;
     }
     .art-section {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 220px;
-      column-gap: clamp(32px, 5vw, 72px);
-      row-gap: var(--space-8);
-      align-items: start;
+      position: relative;
+      isolation: isolate;
+      padding: 76px;
+      border-radius: 28px;
+      overflow: hidden;
+      scroll-margin-top: 24px;
     }
-    .art-section > .section-header,
-    .art-section > .entry-list { grid-column: 1; }
+    .art-section::before {
+      content: "";
+      position: absolute;
+      inset: 28px;
+      z-index: -1;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px #1d241c24;
+    }
     .monet-piece {
-      grid-column: 2;
-      grid-row: 1 / span 2;
-      margin: 8px 0 0;
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      margin: 0;
+      pointer-events: none;
     }
     .monet-piece img {
       display: block;
       width: 100%;
-      height: auto;
-      border-radius: 2px;
-      box-shadow: 0 2px 8px #26231b12;
+      height: 100%;
+      object-fit: cover;
     }
     .monet-piece figcaption {
-      margin-top: 12px;
-      font-size: 11px;
-      line-height: 1.5;
-      color: var(--text-secondary);
-    }
-    .monet-piece figcaption span { display: block; }
-    @media (max-width: 900px) {
-      .art-section { grid-template-columns: minmax(0, 1fr); }
-      .monet-piece {
-        grid-column: 1;
-        grid-row: auto;
-        width: min(100%, 360px);
-        margin-top: 8px;
-      }
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip-path: inset(50%);
+      white-space: nowrap;
     }
     @media (max-width: 720px) {
+      .art-section {
+        padding: 44px 32px;
+        border-radius: 22px;
+      }
+      .art-section::before {
+        inset: 12px;
+        border-radius: 14px;
+      }
       .intro-text { width: 100%; }
       .entry-row { flex-wrap: wrap; }
       .entry-row > .entry-body { width: 100%; }
