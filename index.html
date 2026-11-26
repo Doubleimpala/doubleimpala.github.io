@@ -220,7 +220,7 @@
     .intro-links {
       display: flex;
       margin-top: calc(var(--space-3) - var(--space-6));
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
       gap: var(--space-6);
       font-family: var(--font-display);
@@ -238,6 +238,7 @@
       display: flex;
       align-items: flex-start;
       gap: var(--space-8);
+      padding-inline: 76px;
     }
     .intro-text {
       flex: 1;
@@ -245,8 +246,8 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-8);
-      align-items: center;
-      text-align: center;
+      align-items: flex-start;
+      text-align: left;
     }
     @media (max-width: 720px) {
       .intro-text { width: 100%; }
@@ -254,6 +255,7 @@
       .entry-row > .entry-body { width: 100%; }
       .intro-hero {
         flex-direction: column;
+        padding-inline: 32px;
       }
     }
     @media (max-width: 1320px) {
