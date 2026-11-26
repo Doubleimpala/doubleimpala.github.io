@@ -1,0 +1,63 @@
+html { overflow-x: clip; }
+.art-section {
+  position: relative;
+  isolation: isolate;
+  padding: 76px;
+  scroll-margin-top: 24px;
+}
+.art-section::before {
+  content: "";
+  position: absolute;
+  inset: 28px;
+  z-index: -1;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px #1d241c24;
+}
+.monet-piece {
+  position: absolute;
+  inset: 0 auto 0 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: -2;
+  margin: 0;
+  pointer-events: none;
+}
+.monet-piece img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.monet-piece figcaption {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.project-canvas {
+  --text-secondary: #6e6e73;
+  --text-muted: #6e6e73;
+  flex: 1;
+  max-width: var(--container-max);
+  width: calc(100% - 64px);
+  margin: 0 auto 64px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+.project-canvas .repo-button,
+.project-canvas .repo-button:hover { color: #fff; }
+.project-canvas .media-gallery {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+.project-canvas h1 { overflow-wrap: anywhere; }
+.project-canvas iframe { box-sizing: border-box; }
+@media (max-width: 720px) {
+  .art-section { padding: 44px 32px; }
+  .art-section::before { inset: 12px; border-radius: 14px; }
+  .project-canvas { width: calc(100% - 32px); margin-bottom: 32px; }
+}
