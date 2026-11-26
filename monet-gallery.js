@@ -1,6 +1,5 @@
-// Add new paintings here; each section/page has a unique slot in the daily rotation.
-// Keep paths relative to the homepage. Titles are optional for unidentified works.
-const monetPaintings = [
+// Known titles and offline fallback. Published images are discovered automatically.
+let monetPaintings = [
   { file: 'the-cliff-walk-pourville-repro.jpg', title: 'The Cliff Walk at Pourville' },
   { file: 'base_8145565.jpg', title: 'The Japanese Footbridge' },
   { file: 'the-flowered-garden-reproducti.jpg', title: 'The Flowered Garden' },
@@ -23,7 +22,7 @@ function placeMonetPaintings() {
     const figure = document.createElement('figure');
     figure.className = 'monet-piece';
     const image = document.createElement('img');
-    image.src = `monet/${painting.file}`;
+    image.src = `monet/${encodeURIComponent(painting.file)}`;
     image.alt = `${painting.title}, a painting by Claude Monet`;
     image.loading = section.classList.contains('project-canvas') ? 'eager' : 'lazy';
     image.decoding = 'async';
@@ -40,6 +39,30 @@ function placeMonetPaintings() {
 
 // The runtime can replace content again after fetching the document. Reattach
 // any missing artwork without duplicating figures or changing today's choices.
-placeMonetPaintings();
-const monetObserver = new MutationObserver(placeMonetPaintings);
-monetObserver.observe(document.body, { childList: true, subtree: true });
+async function startMonetGallery() {
+  try {
+    // GitHub Pages does not provide directory listings. Discover the published
+    // folder through GitHub; keep the bundled selection if discovery is offline.
+    const response = await fetch(
+      'https://api.github.com/repos/Doubleimpala/doubleimpala.github.io/contents/monet?ref=main',
+      { signal: AbortSignal.timeout(2500) }
+    );
+    if (!response.ok) throw new Error('Painting discovery unavailable');
+    const files = await response.json();
+    const known = new Map(monetPaintings.map(p => [p.file, p.title]));
+    const discovered = files
+      .filter(f => f.type === 'file' && /\.(jpe?g|png|webp|avif|gif)$/i.test(f.name))
+      .map(f => ({
+        file: f.name,
+        title: known.get(f.name) || f.name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' '),
+      }))
+      .sort((a, b) => a.file < b.file ? -1 : a.file > b.file ? 1 : 0);
+    if (discovered.length) monetPaintings = discovered;
+  } catch {
+    // The original paintings remain usable without GitHub or network access.
+  }
+  placeMonetPaintings();
+  const monetObserver = new MutationObserver(placeMonetPaintings);
+  monetObserver.observe(document.body, { childList: true, subtree: true });
+}
+startMonetGallery();
