@@ -131,7 +131,7 @@
       gap: var(--space-8);
     }
     .notes-layout > .section-shell {
-      gap: var(--space-16);
+      gap: clamp(80px, 10svh, 112px);
     }
     .section-header {
       display: flex;
@@ -250,6 +250,7 @@
       text-align: left;
     }
     @media (max-width: 720px) {
+      .notes-layout > .section-shell { gap: var(--space-16); }
       .intro-text { width: 100%; }
       .entry-row { flex-wrap: wrap; }
       .entry-row > .entry-body { width: 100%; }
