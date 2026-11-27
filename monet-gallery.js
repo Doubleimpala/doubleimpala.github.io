@@ -22,14 +22,18 @@ function placeMonetPaintings() {
     .filter(section => !section.closest('x-dc'));
   // The document wrapper can mount after this script executes.
   if (!sections.length) return false;
-  const today = Math.floor(Date.now() / 86400000);
+  const now = new Date();
+  const today = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
   sections.forEach((section, index) => {
-    if (section.querySelector('.monet-piece')) return;
+    const existing = section.querySelector('.monet-piece');
     const slot = section.dataset.monetSlot === undefined
       ? index * 2 : Number(section.dataset.monetSlot);
     const painting = monetPaintings[(today + slot) % monetPaintings.length];
+    const selection = `${today}:${painting.file}`;
+    if (existing?.dataset.selection === selection) return;
     const figure = document.createElement('figure');
     figure.className = 'monet-piece';
+    figure.dataset.selection = selection;
     const image = document.createElement('img');
     image.src = `monet/${encodeURIComponent(painting.file)}`;
     image.alt = `${painting.title}, a painting by Claude Monet`;
@@ -49,7 +53,8 @@ function placeMonetPaintings() {
     artist.textContent = 'Claude Monet';
     caption.append(artist);
     figure.append(image, caption);
-    section.append(figure);
+    if (existing) existing.replaceWith(figure);
+    else section.append(figure);
   });
   return true;
 }
@@ -79,11 +84,28 @@ async function startMonetGallery() {
       }))
       .sort((a, b) => a.file < b.file ? -1 : a.file > b.file ? 1 : 0);
     if (discovered.length) {
-      // Use discoveries on the next page load, avoiding a visible image swap.
-      localStorage.setItem('monet-paintings', JSON.stringify(discovered));
+      monetPaintings = discovered;
+      // Storage availability must not prevent new images joining the rotation.
+      try { localStorage.setItem('monet-paintings', JSON.stringify(discovered)); } catch {}
+      placeMonetPaintings();
     }
   } catch {
     // The original paintings remain usable without GitHub or network access.
   }
 }
 startMonetGallery();
+
+// Refresh long-lived tabs at local midnight, including after sleep or back/forward.
+let monetMidnightTimer;
+function scheduleMonetRotation() {
+  clearTimeout(monetMidnightTimer);
+  placeMonetPaintings();
+  const now = new Date();
+  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  monetMidnightTimer = setTimeout(scheduleMonetRotation, midnight - now + 100);
+}
+addEventListener('pageshow', scheduleMonetRotation);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) scheduleMonetRotation();
+});
+scheduleMonetRotation();
