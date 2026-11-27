@@ -6,6 +6,8 @@ const bundledPaintings = [
   { file: 'antibes-in-the-morning-reprodu.jpg', title: 'Antibes in the Morning' },
   { file: 'the-walk-woman-with-a-parasol-.jpg', title: 'Woman with a Parasol' },
   { file: 'Pathway.jpg', title: 'Garden Path' },
+  { file: 'base_8064903.jpg', title: 'Painting by Claude Monet' },
+  { file: 'field-of-tulips-in-holland-rep.jpg', title: 'Field of Tulips in Holland' },
 ];
 let monetPaintings = bundledPaintings;
 bundledPaintings.sort((a, b) => a.file < b.file ? -1 : a.file > b.file ? 1 : 0);
@@ -17,19 +19,27 @@ try {
   )) monetPaintings = cached;
 } catch { /* Storage is optional. */ }
 
+function shufflePaintings(paintings) {
+  const result = [...new Map(paintings.map(p => [p.file, p])).values()];
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+  return result;
+}
+let pagePaintings = shufflePaintings(monetPaintings);
+
 function placeMonetPaintings() {
   const sections = [...document.querySelectorAll('.art-section')]
     .filter(section => !section.closest('x-dc'));
   // The document wrapper can mount after this script executes.
   if (!sections.length) return false;
-  const now = new Date();
-  const today = Math.floor(Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) / 86400000);
   sections.forEach((section, index) => {
     const existing = section.querySelector('.monet-piece');
-    const slot = section.dataset.monetSlot === undefined
-      ? index * 2 : Number(section.dataset.monetSlot);
-    const painting = monetPaintings[(today + slot) % monetPaintings.length];
-    const selection = `${today}:${painting.file}`;
+    const painting = pagePaintings[index];
+    // Never repeat an image if a future page has more sections than paintings.
+    if (!painting) return;
+    const selection = painting.file;
     if (existing?.dataset.selection === selection) return;
     const figure = document.createElement('figure');
     figure.className = 'monet-piece';
@@ -42,7 +52,11 @@ function placeMonetPaintings() {
     image.addEventListener('error', () => {
       // Discovery can see a new file before Pages finishes deploying it.
       // Fall back to a bundled painting rather than leaving empty sidebars.
-      const fallback = bundledPaintings[(today + slot) % bundledPaintings.length];
+      const used = new Set(pagePaintings.slice(0, sections.length).map(p => p.file));
+      const fallback = bundledPaintings.find(p => !used.has(p.file) && p.file !== painting.file);
+      if (!fallback) return;
+      pagePaintings[index] = fallback;
+      figure.dataset.selection = fallback.file;
       image.src = `monet/${encodeURIComponent(fallback.file)}`;
       image.alt = `${fallback.title}, a painting by Claude Monet`;
       caption.textContent = `${fallback.title} — Claude Monet`;
@@ -60,7 +74,7 @@ function placeMonetPaintings() {
 }
 
 // The runtime can replace content again after fetching the document. Reattach
-// any missing artwork without duplicating figures or changing today's choices.
+// any missing artwork without duplicating figures or reshuffling this page.
 async function startMonetGallery() {
   // Paint immediately, including when API requests are slow or unavailable.
   placeMonetPaintings();
@@ -84,10 +98,8 @@ async function startMonetGallery() {
       }))
       .sort((a, b) => a.file < b.file ? -1 : a.file > b.file ? 1 : 0);
     if (discovered.length) {
-      monetPaintings = discovered;
-      // Storage availability must not prevent new images joining the rotation.
+      // New discoveries join the next load; the current page stays stable.
       try { localStorage.setItem('monet-paintings', JSON.stringify(discovered)); } catch {}
-      placeMonetPaintings();
     }
   } catch {
     // The original paintings remain usable without GitHub or network access.
@@ -95,17 +107,10 @@ async function startMonetGallery() {
 }
 startMonetGallery();
 
-// Refresh long-lived tabs at local midnight, including after sleep or back/forward.
-let monetMidnightTimer;
-function scheduleMonetRotation() {
-  clearTimeout(monetMidnightTimer);
-  placeMonetPaintings();
-  const now = new Date();
-  const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-  monetMidnightTimer = setTimeout(scheduleMonetRotation, midnight - now + 100);
-}
-addEventListener('pageshow', scheduleMonetRotation);
-document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) scheduleMonetRotation();
+// A restored back/forward-cache page counts as another visit.
+addEventListener('pageshow', event => {
+  if (event.persisted) {
+    pagePaintings = shufflePaintings(monetPaintings);
+    placeMonetPaintings();
+  }
 });
-scheduleMonetRotation();
